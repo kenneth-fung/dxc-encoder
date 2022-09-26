@@ -1,29 +1,36 @@
 import java.util.Random;
 
 public class Encoder {
-    private Random randomOffsetGenerator = new Random();
+
+    private ReferenceTable referenceTable;
+    private Random randomOffsetGenerator;
+
+    public Encoder(ReferenceTable referenceTable) {
+        this.referenceTable = referenceTable;
+        randomOffsetGenerator = new Random();
+    }
 
     public String encode(String plainText) {
         char[] plainTextCharArray = plainText.toCharArray();
-        int offsetIndex = randomOffsetGenerator.nextInt(ReferenceTable.SIZE);
+        int offsetIndex = randomOffsetGenerator.nextInt(referenceTable.getSize());
 
-        String encodedText = Character.toString(ReferenceTable.getCharacterFromIndex(offsetIndex));
+        String encodedText = Character.toString(referenceTable.getEntryFromIndex(offsetIndex));
         for (int i = 0; i < plainTextCharArray.length; i++) {
             // if input character is space, add space to encoded text and continue
             // OR if input character is not in reference table, map back to itself
-            if (!ReferenceTable.containsCharacter(plainTextCharArray[i])) {
+            if (!referenceTable.containsCharacter(plainTextCharArray[i])) {
                 encodedText += plainTextCharArray[i];
                 continue;
             }
 
             // calculate shifted index, wrapping around to end of table if shifted index is negative
-            int shiftedIndex = (ReferenceTable.getIndexFromCharacter(plainTextCharArray[i]) - offsetIndex) % ReferenceTable.SIZE;
+            int shiftedIndex = (referenceTable.getIndexFromEntry(plainTextCharArray[i]) - offsetIndex) % referenceTable.getSize();
             if (shiftedIndex < 0) {
-                shiftedIndex += ReferenceTable.SIZE;
+                shiftedIndex += referenceTable.getSize();
             }
 
             // append encoded character to final encoded text
-            encodedText += ReferenceTable.getCharacterFromIndex(shiftedIndex);
+            encodedText += referenceTable.getEntryFromIndex(shiftedIndex);
         }
 
         return encodedText;
@@ -31,22 +38,22 @@ public class Encoder {
 
     public String decode(String encodedText) {
         char[] encodedTextCharArray = encodedText.toCharArray();
-        int offsetIndex = ReferenceTable.getIndexFromCharacter(encodedTextCharArray[0]);
+        int offsetIndex = referenceTable.getIndexFromEntry(encodedTextCharArray[0]);
 
         String plainText = "";
         for (int i = 1; i < encodedTextCharArray.length; i++) {
             // if input character is space, add space to encoded text and continue
             // OR if input character is not in reference table, map back to itself
-            if (!ReferenceTable.containsCharacter(encodedTextCharArray[i])) {
+            if (!referenceTable.containsCharacter(encodedTextCharArray[i])) {
                 plainText += encodedTextCharArray[i];
                 continue;
             }
 
             // calculate shifted index, wrapping around to start of table if shifted index exceeds last index
-            int shiftedIndex = (ReferenceTable.getIndexFromCharacter(encodedTextCharArray[i]) + offsetIndex) % ReferenceTable.SIZE;
+            int shiftedIndex = (referenceTable.getIndexFromEntry(encodedTextCharArray[i]) + offsetIndex) % referenceTable.getSize();
 
             // append encoded character to final decoded text
-            plainText += ReferenceTable.getCharacterFromIndex(shiftedIndex);
+            plainText += referenceTable.getEntryFromIndex(shiftedIndex);
         }
 
         return plainText;

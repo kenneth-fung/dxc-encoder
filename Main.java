@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Encoder encoder = new Encoder();
+        ReferenceTable referenceTable = new ReferenceTable("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()*+,-./".toCharArray());
+        Encoder encoder = new Encoder(referenceTable);
         Scanner inputScanner = new Scanner(System.in);
         while (true) {
             System.out.println("Please enter the text to encode:");
