@@ -14,9 +14,9 @@ This is a program written in Java that continuously takes a string input, encode
 - The encoding is case-sensitive e.g. the character `A` is in the reference table and will be mapped to another character, but the character `a` is not in the table and will be mapped to itself.
 
 ## Usage
-1. Download the `.zip` file from the [Releases](https://github.com/kenneth-fung/dxc-encoder/releases) page.
-2. Unzip the downloaded `.zip` file.
-3. If using Windows, run the `.bat` file in the Encoder folder. If using Mac, open the terminal, navigate to the Encoder folder, and run the command `java Main`.
+1. Download the source code from this repository.
+2. Unzip the downloaded `.zip` file and open the folder.
+3. If using Windows, you should be able to double-click the `.bat` file to run the program. If using Mac, open the terminal, navigate to the folder, and run the command `java Main`.
 4. To exit the program, close the command prompt/terminal window.
 
 ## Software
