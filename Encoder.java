@@ -16,8 +16,7 @@ public class Encoder {
 
         String encodedText = Character.toString(referenceTable.getEntryFromIndex(offsetIndex));
         for (int i = 0; i < plainTextCharArray.length; i++) {
-            // if input character is space, add space to encoded text and continue
-            // OR if input character is not in reference table, map back to itself
+            // if input character is not in reference table, map back to itself
             if (!referenceTable.containsCharacter(plainTextCharArray[i])) {
                 encodedText += plainTextCharArray[i];
                 continue;
@@ -42,8 +41,7 @@ public class Encoder {
 
         String plainText = "";
         for (int i = 1; i < encodedTextCharArray.length; i++) {
-            // if input character is space, add space to encoded text and continue
-            // OR if input character is not in reference table, map back to itself
+            // if input character is not in reference table, map back to itself
             if (!referenceTable.containsCharacter(encodedTextCharArray[i])) {
                 plainText += encodedTextCharArray[i];
                 continue;
