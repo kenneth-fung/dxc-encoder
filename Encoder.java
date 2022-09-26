@@ -11,7 +11,7 @@ public class Encoder {
         for (int i = 0; i < plainTextCharArray.length; i++) {
             // if input character is space, add space to encoded text and continue
             // OR if input character is not in reference table, map back to itself
-            if (plainTextCharArray[i] == ' ' || !ReferenceTable.containsCharacter(plainTextCharArray[i])) {
+            if (!ReferenceTable.containsCharacter(plainTextCharArray[i])) {
                 encodedText += plainTextCharArray[i];
                 continue;
             }
@@ -37,7 +37,7 @@ public class Encoder {
         for (int i = 1; i < encodedTextCharArray.length; i++) {
             // if input character is space, add space to encoded text and continue
             // OR if input character is not in reference table, map back to itself
-            if (encodedTextCharArray[i] == ' ' || !ReferenceTable.containsCharacter(encodedTextCharArray[i])) {
+            if (!ReferenceTable.containsCharacter(encodedTextCharArray[i])) {
                 plainText += encodedTextCharArray[i];
                 continue;
             }
