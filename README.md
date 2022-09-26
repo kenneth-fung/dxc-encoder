@@ -4,7 +4,7 @@ This is a program written in Java that continuously takes a string input, encode
 
 - The program is started in the `Main` class.
 - The encoding occurs using the `encode` method in the `Encoder` class.
-- The reference table used during encoding is stored in the `ReferenceTable` class.
+- The reference table entries used during encoding are passed to `ReferenceTable` during instantiation in `Main`.
 - The `Encoder` class also contains a `decode` method, although it is not used in the main program loop.
 
 
